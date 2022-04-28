@@ -1,4 +1,4 @@
-# github-action-build-and-push
+# github-action-build-and-push-to-ghcr
 
 This is a reusable workflow that builds and pushes images to a container registry.
 
