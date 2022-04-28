@@ -17,9 +17,8 @@ jobs:
     with:
       docker_file_path: ./Dockerfile
       docker_target: production
-      external_registry: ghcr.io
+      docker_image_repository: ghcr.io/user/image_repository
     secrets:
-      REG_USERNAME: ${{ secrets.REG_USERNAME }}
-      REG_PW: ${{ secrets.REG_PW }}
+      GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
 ```
 
