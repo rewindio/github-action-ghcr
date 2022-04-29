@@ -17,7 +17,7 @@ jobs:
     with:
       docker_file_path: ./Dockerfile
       docker_target: production
-      docker_image_repository: ghcr.io/user/image_repository
+      docker_image_repository: rewindio/image_repository_in_ghcr
     secrets:
       GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
 ```
