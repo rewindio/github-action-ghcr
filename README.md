@@ -1,4 +1,4 @@
-# github-action-build-and-push-to-ghcr
+# github-action-ghcr
 
 This is a reusable workflow that builds and pushes images to a container registry.
 
@@ -13,7 +13,7 @@ on:
 jobs:
   build-and-push:
     name: "Build & Push"
-    uses: rewindio/github-actions-build-and-push/.github/workflows/build-and-push-to-ghcr.yml@v0
+    uses: rewindio/github-action-ghcr/.github/workflows/build-and-push-to-ghcr.yml@v0
     with:
       docker_file_path: ./Dockerfile
       docker_target: production
