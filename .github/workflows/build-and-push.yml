@@ -56,7 +56,7 @@ jobs:
         with:
           images: "ghcr.io/${{ inputs.docker_image_repository }}"
           tags: |
-            type=sha,enable=true,priority=100,prefix=sha-,suffix=,format=short
+            type=sha,enable=true,priority=100,prefix=${{ inputs.docker_target }}-,suffix=,format=short
             type=raw,value=${{ inputs.docker_target }}
 
       - name: Set up Docker Buildx
