@@ -49,14 +49,23 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_PAT }}
 
+      - name: Set image prefix
+        id: image-tag
+        run: |
+          if [ -z "${{ inputs.docker_target }}" ]; then
+            echo "::set-output name=prefix::sha"
+          else
+            echo "::set-output name=prefix::${{ inputs.docker_target }}"
+          fi
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
         with:
           images: "ghcr.io/${{ inputs.docker_image_repository }}"
           tags: |
-            type=sha,enable=true,priority=100,prefix=${{ inputs.docker_target }}-,suffix=,format=short
-            type=raw,value=${{ inputs.docker_target }}
+            type=sha,enable=true,priority=100,prefix=${{ steps.image-tag.outputs.prefix }}-,suffix=,format=short
+            type=raw,value=${{ steps.image-tag.outputs.prefix }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
