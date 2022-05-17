@@ -51,6 +51,16 @@ jobs:
 
       - name: Docker meta
         id: meta
+        if: inputs.docker_target == ''
+        uses: docker/metadata-action@v3
+        with:
+          images: "ghcr.io/${{ inputs.docker_image_repository }}"
+          tags: |
+            type=sha,enable=true,priority=100,prefix=,suffix=,format=short
+
+      - name: Docker meta
+        id: meta
+        if: inputs.docker_target != ''
         uses: docker/metadata-action@v3
         with:
           images: "ghcr.io/${{ inputs.docker_image_repository }}"
