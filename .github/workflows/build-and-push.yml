@@ -5,7 +5,7 @@ on:
     inputs:
       docker_file_path:
         description: "The path to the Dockerfile"
-         required: false
+        required: false
         type: string
         default: ./Dockerfile
 
