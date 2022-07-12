@@ -21,4 +21,3 @@ jobs:
     secrets:
       GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
 ```
-
