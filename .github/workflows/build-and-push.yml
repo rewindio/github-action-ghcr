@@ -30,7 +30,7 @@ on:
         required: false
         type: string
         default: |
-          linux/amd64,linux/arm64
+          linux/amd64
 
     secrets:
       GITHUB_PAT:
@@ -81,6 +81,8 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
 
       - name: Cache Docker layers
         uses: actions/cache@v2
