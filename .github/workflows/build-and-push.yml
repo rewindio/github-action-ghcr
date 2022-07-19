@@ -32,6 +32,12 @@ on:
         default: |
           linux/amd64
 
+      pull:
+        description: "Whether or not to pull any referenced images during the build"
+        required: false
+        type: boolean
+        default: true
+
     secrets:
       GITHUB_PAT:
         description: "A GitHub access token that has repo and read:packages scopes"
@@ -40,9 +46,8 @@ on:
         description: "Docker image build arguments"
         required: false
 jobs:
-
   build-and-publish:
-    name: 'Build & Publish'
+    name: "Build & Publish"
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.meta.outputs.tags }}
@@ -105,6 +110,7 @@ jobs:
           file: "${{ inputs.docker_file_path }}"
           platforms: ${{ inputs.platforms }}
           push: ${{ github.ref == 'refs/heads/main' }}
+          pull: ${{ inputs.pull }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: ${{ inputs.docker_target }}
