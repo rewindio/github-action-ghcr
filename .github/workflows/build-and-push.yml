@@ -32,6 +32,18 @@ on:
         default: |
           linux/amd64
 
+      pull:
+        description: "Always attempt to pull all referenced images (default false)"
+        required: false
+        type: boolean
+        default: false
+
+      no_cache:
+        description: "Do not use cache when building the image (default false)"
+        required: false
+        type: boolean
+        default: false
+
     secrets:
       GITHUB_PAT:
         description: "A GitHub access token that has repo and read:packages scopes"
@@ -40,9 +52,8 @@ on:
         description: "Docker image build arguments"
         required: false
 jobs:
-
   build-and-publish:
-    name: 'Build & Publish'
+    name: "Build & Publish"
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.meta.outputs.tags }}
@@ -105,6 +116,8 @@ jobs:
           file: "${{ inputs.docker_file_path }}"
           platforms: ${{ inputs.platforms }}
           push: ${{ github.ref == 'refs/heads/main' }}
+          pull: ${{ inputs.pull }}
+          no-cache: ${{ inputs.no_cache }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: ${{ inputs.docker_target }}
