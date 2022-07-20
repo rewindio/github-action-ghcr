@@ -33,10 +33,16 @@ on:
           linux/amd64
 
       pull:
-        description: "Whether or not to pull any referenced images during the build"
+        description: "Always attempt to pull all referenced images (default false)"
         required: false
         type: boolean
-        default: true
+        default: false
+
+      no_cache:
+        description: "Do not use cache when building the image (default false)"
+        required: false
+        type: boolean
+        default: false
 
     secrets:
       GITHUB_PAT:
@@ -111,6 +117,7 @@ jobs:
           platforms: ${{ inputs.platforms }}
           push: ${{ github.ref == 'refs/heads/main' }}
           pull: ${{ inputs.pull }}
+          no-cache: ${{ inputs.no_cache }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: ${{ inputs.docker_target }}
